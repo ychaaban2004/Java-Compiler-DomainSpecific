@@ -7,6 +7,13 @@ Programming Language Developed: Trick - a domain specific version of Java
         
         https://craftinginterpreters.com/
         
+HEAD NOTES: 
+        - Any mention of "|*********|" indicates an area of improvement or advancement  needed for development
+        - Any mention of "|&&&&&&&&&| indicates uncertainties or additions needed for basic functionality
+
+IDEAS FOR IMPLEMENTATION:
+        - To quote Crafting Interpreters "Ideally, we would have an actual abstraction, some kind of “ErrorReporter” interface that gets passed to the scanner and parser so that we can swap out different reporting strategies." - may be an opporutnity for AI to play a role
+
 
 Planning:
 
