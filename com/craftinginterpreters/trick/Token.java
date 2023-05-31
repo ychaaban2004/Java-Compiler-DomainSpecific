@@ -1,6 +1,6 @@
 package com.craftinginterpreters.trick;
 
-class Token extends trick{
+class Token {
     final TokenType type;
     final String lexeme;
     final Object literal;
