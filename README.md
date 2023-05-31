@@ -21,4 +21,9 @@ IDEAS FOR IMPLEMENTATION:
 ## Planning
 
 
+Chapter - 5 by 7th June (Ratiq)
+Chapter - 4 by 7th June (Youssef)
+
+
+
 ## Progress
