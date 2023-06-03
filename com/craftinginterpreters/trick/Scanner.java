@@ -17,6 +17,27 @@ class Scanner {
     private int start = 0;
     private int current = 0;
     private int line = 1;
+    private static final Map<String,TokenType> keywords;
+
+    static{
+        keywords = new HashMap<>();
+        keywords.put("and", AND);
+        keywords.put("class", CLASS);
+        keywords.put("else",   ELSE);
+        keywords.put("false",  FALSE);
+        keywords.put("for",    FOR);
+        keywords.put("fun",    FUN);
+        keywords.put("if",     IF);
+        keywords.put("nil",    NIL);
+        keywords.put("or",     OR);
+        keywords.put("print",  PRINT);
+        keywords.put("return", RETURN);
+        keywords.put("super",  SUPER);
+        keywords.put("this",   THIS);
+        keywords.put("true",   TRUE);
+        keywords.put("var",    VAR);
+        keywords.put("while",  WHILE);
+    }
 
     /*Construct will instantiate the source code with the provided source file for each scanner object
      * @param: source file - string
@@ -104,6 +125,9 @@ class Scanner {
                 */
                 if(isDigit(c)){
                     number();
+                }
+                else if(isAlpha(c)){
+                    identifier();
                 }
                 else{
                     trick.error(line, "Unexpected character.");
@@ -226,4 +250,21 @@ class Scanner {
         if(current + 1 >= source.length()) return '\0';
         return source.charAt(current + 1);
     }
+
+    //RESEVED WORDS AND IDENTIFIERS
+
+    private void identifier(){
+        while(isAlphaNumeric(peek())) advance();
+        
+        addToken(IDENTIFIER);
+    }
+
+    private boolean isAlpha(char c){
+        return(c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
+    }
+
+    private boolean isAlphaNumeric(char c){
+        return isAlpha(c) || isDigit(c);
+    }
+
 }
