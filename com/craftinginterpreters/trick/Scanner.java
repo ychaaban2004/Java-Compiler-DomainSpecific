@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.FlavorException;
+
 import static com.craftinginterpreters.trick.TokenType.*;
 
 /*Class where we scan through code and tokenize the source */
@@ -47,7 +49,7 @@ class Scanner {
         return current >= source.length(); 
     }
 
-    /*scans to produce tokens assuming each token will be one char long and moving at a 1 char pace
+    /*The identifier of all the words to determine what we send to the tokenizer
      * @param: none
      * @return: none
      */
@@ -64,13 +66,48 @@ class Scanner {
             case '+': addToken(PLUS); break;
             case ';': addToken(SEMICOLON); break;
             case '*': addToken(STAR); break;
-            
+            case '!':
+                addToken(match('=') ? BANG_EQUAL: BANG);
+                break;
+            case '=':
+                addToken(match('=') ? EQUAL_EQUAL : EQUAL);
+                break;
+            case '<':
+                addToken(match('=') ? LESS_EQUAL : LESS);
+                break;
+            case '>':
+                addToken(match('=') ? GREATER_EQUAL : GREATER);
+                break;
+            case '/':
+                if(match('/')){
+                    while(peek() != '\n' && !isAtEnd()) advance();
+                }
+                else{
+                    addToken(SLASH);
+                }
+                break;
+            //below skips over chars we dont care about: i.e whitespace
+            case ' ':
+            case '\r':
+            case '\t':
+                break;
+            case '\n':
+                line++;
+                break;
+            //begin more complex tokens such as strings
+            case '"': string(); break;
+
             default:
                 /* |************| This can be problematic as a blob of 
                  * random text will return error for each char of that blob
                  * improve this by reporting blobs of unknown text as one error
                 */
-                trick.error(line, "Unexpected character.");
+                if(isDigit(c)){
+                    number();
+                }
+                else{
+                    trick.error(line, "Unexpected character.");
+                }
                 break;
         }
     }
@@ -101,5 +138,92 @@ class Scanner {
     private void addToken(TokenType type, Object literal){
         String text = source.substring(start, current);
         tokens.add(new Token(type,text,literal,line));
+    }
+
+    /*Checks for more complex operations such as != and <= treating
+     *  them as a single token, telling us if we have matched such 
+     * a case or are still within the simple cases 
+     * @param: char to check - char
+     * @return: if we have matched a more complex case - boolean
+    */
+    private boolean match(char expected){
+        if(isAtEnd()) return false;
+        if(source.charAt(current) != expected) return false;
+
+        current++;
+        return true;
+    }
+
+    /*Lookahead method similar to match but here we will use this to continuelly check
+     * for the next character till we reach EOF or EOL, doesnt consume chars
+     * @param:none
+     * @return: identifying char of end of commentting system - char
+     */
+    private char peek(){
+        if(isAtEnd()) return '\0';
+        return source.charAt(current);
+    }
+
+    //STRING LITERALS
+
+    /*handles the tokenization parameters upon encountering a string
+     * @param:none
+     * @return:none
+     */
+    private void string(){
+        //this means we can have multi line strings, may want a different implementation
+        // |************|
+        while(peek() != '"' && !isAtEnd()){
+            if(peek() == '\n') line++;
+            advance();
+        }
+
+        if(isAtEnd()){
+            trick.error(line, "Unterminated string.");
+            return;
+        }
+
+        //advance past the closing "
+        advance();
+        //|*************| \n is not supported for strings - may want to implement this
+        //grab the string as object and send it as our object in the token class
+        String value = source.substring(start + 1, current-1);
+        addToken(STRING, value);
+    }
+
+    // NUMBER LITERALS
+
+    /*Checks if the char at hand is a digit value
+     * @param: the present char in the source file - char
+     * @return: is it a digit or not - boolean
+     */
+    private boolean isDigit(char c){
+        return c >='0' && c <= '9';
+    }
+
+    /*Analyzes the whole number and any . parts to take the whole lexeme and send it for tokenization
+     * @param: none
+     * @return: none
+     */
+    private void number(){
+        while(isDigit(peek())) advance();
+
+        //fraction
+        if(peek() == '.' && isDigit(peekNext())){
+            advance();
+
+            while(isDigit(peek())) advance();
+        }
+
+        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
+    }
+
+    /*An further peek method, this is the most we will peek at a time - 2 chars ahead - and this seocndary function makes that clear
+     * @param: none
+     * @return: what is the char 2 steps ahead - char
+     */
+    private char peekNext(){
+        if(current + 1 >= source.length()) return '\0';
+        return source.charAt(current + 1);
     }
 }

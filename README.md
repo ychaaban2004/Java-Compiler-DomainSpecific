@@ -27,3 +27,12 @@ Chapter - 4 by 7th June (Youssef)
 
 
 ## Progress
+
+
+
+
+## Documentation
+
+NUMBER LITERALS:
+        when performing method calls on numbers, negation will not take precendence over the method
+                i.e: print -123.abs(); --> -123
