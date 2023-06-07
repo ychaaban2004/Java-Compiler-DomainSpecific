@@ -1,7 +1,7 @@
 package com.craftinginterpreters.trick;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.File; //DO NOT DELETE: this will be used when reading a file rather than line by line
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
