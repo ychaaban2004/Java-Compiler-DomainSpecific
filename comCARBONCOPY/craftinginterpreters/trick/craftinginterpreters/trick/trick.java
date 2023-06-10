@@ -1,4 +1,4 @@
-package com.craftinginterpreters.trick;
+package comCARBONCOPY.craftinginterpreters.trick.craftinginterpreters.trick;
 
 import java.io.BufferedReader;
 import java.io.File; //DO NOT DELETE: this will be used when reading a file rather than line by line
@@ -22,7 +22,7 @@ enum TokenType{
     LESS, LESS_EQUAL,
 
     //Literals.
-    IDENTIFIER, STRING, NUMBER,CHAR,
+    IDENTIFIER, STRING, NUMBER,
 
     //Keyword tokens (reserved names)
     AND, CLASS, ELSE, FALSE, FUN, FOR, IF, NIL, OR,

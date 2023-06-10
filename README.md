@@ -22,13 +22,18 @@ IDEAS FOR IMPLEMENTATION:
 
 
 Chapter - 5 by 7th June (Ratiq)
-Chapter - 4 by 7th June (Youssef)
-
+Chapter - 4 by 7th June (Youssef) - DONE
+        Extra Functionality - Finish by June 14th
+                1. Tokenize Chars - DONE
+                        -unknown characters blob should be reported as one entity rather than individual i.e "これ は　だいじょぶない"
+                2. Semicolons and newline handling
+                3. Specific error reporting
 
 
 ## Progress
 
-
+Chapter 4 Complete
+        Char Tokenization Complete - not formally tested
 
 
 ## Documentation

@@ -11,7 +11,7 @@ result = false;
 
 - Numbers - Integers, doubles and floats
 
-```java
+```java - RIGHT NOW EVERY NUMBER IS A FLOAT - CAN CHANGE BASED ON PARSER IMPLEMENTATION
 result = 1234;
 result = 1.234;
 ```
@@ -20,11 +20,11 @@ result = 1.234;
 
 ```java
 result = 'a';
-result = "word";
-result = "This is a statement";
+result = "word"; - done
+result = "This is a statement"; - done
 ```
 
-- Null - A symbol to specify **null** value or and empty string
+- Null - A symbol to specify **null** value or and empty string - done
 
 ## Expression
 
@@ -117,6 +117,8 @@ int num2; //Null value variable
 
 
 ## Control flow
+
+after the parser is complete we could implement the ability to not even tokenize lines of code never executed in real time, maybe if it makes sense
 
 Control flow means the ability to skip some code or execute some lines of code multiple times.
 

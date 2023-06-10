@@ -1,12 +1,11 @@
-package com.craftinginterpreters.trick;
+package comCARBONCOPY.craftinginterpreters.trick.craftinginterpreters.trick;
 
-import java.text.BreakIterator;
+import static comCARBONCOPY.craftinginterpreters.trick.craftinginterpreters.trick.TokenType.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.craftinginterpreters.trick.TokenType.*;
 
 /*Class where we scan through code and tokenize the source */
 class Scanner {
@@ -116,8 +115,6 @@ class Scanner {
             //begin more complex tokens such as strings
             case '"': string(); break;
 
-            case '\'': character(); break;
-
             default:
                 /* |************| This can be problematic as a blob of 
                  * random text will return error for each char of that blob
@@ -213,46 +210,6 @@ class Scanner {
         //grab the string as object and send it as our object in the token class
         String value = source.substring(start + 1, current-1);
         addToken(STRING, value);
-    }
-
-    //CHAR LITERALS
-
-    private void character(){
-        if(peek() != '\'' && !isAtEnd()){
-            advance();
-        }
-        else{
-            if(isAtEnd()){
-                trick.error(line, "Unterminated char");
-                return;
-            }
-            else{
-                trick.error(line, "No expression given to char");
-                advance();
-                return;
-            }
-        }
-        if(!isAtEnd() && peek() != '\'' ){
-            while(peek() != '\'' && !isAtEnd()) advance();
-            if(isAtEnd()){
-                trick.error(line, "Unterminated char");
-                return;
-            }
-            else{
-                trick.error(line, "Invalid char");
-                advance();
-                return;
-            }
-        }
-        else if(isAtEnd()){
-            trick.error(line, "Unterminated char");
-            return;
-        }
-    
-        advance();
-
-        String value = source.substring(start + 1 , current - 1);
-        addToken(CHAR, value);
     }
 
     // NUMBER LITERALS
