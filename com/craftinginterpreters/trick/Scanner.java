@@ -130,7 +130,7 @@ class Scanner {
                     identifier();
                 }
                 else{
-                    trick.error(line, "Unexpected character.");
+                    bloberror();
                 }
                 break;
         }
@@ -215,7 +215,7 @@ class Scanner {
         addToken(STRING, value);
     }
 
-    //CHAR LITERALS
+    //CHAR LITERALS ?!?!?!?!
 
     private void character(){
         if(peek() != '\'' && !isAtEnd()){
@@ -320,6 +320,24 @@ class Scanner {
      */
     private boolean isAlphaNumeric(char c){
         return isAlpha(c) || isDigit(c);
+    }
+
+    //BLOB ERROR REPORTING ?!?!?!?!?!
+
+    /*if an unrecognized text is presented, we keep reading the whole text as an error, rather than have "ajisdof"
+     * as an error for each single character we read
+     * @param: none
+     * @return: none
+     */
+    private void bloberror(){
+        while(peek() != ' ' && !isAtEnd()){
+            if(peek() == '\n'){
+                line++;
+                break;
+            }
+            advance();
+        }
+        trick.error(line, "Unrecognized Text");
     }
 
 }

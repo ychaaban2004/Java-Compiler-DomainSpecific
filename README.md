@@ -13,6 +13,7 @@ Please note this language is built upon following the following source very clos
 HEAD NOTES:
         - Any mention of "|*********|" indicates an area of improvement or advancement  needed for development
         - Any mention of "|&&&&&&&&&| indicates uncertainties or additions needed for basic functionality
+        -Any mention of ?!?!?!?!?! indicates a new addition that needs to be tested
 
 IDEAS FOR IMPLEMENTATION:
         - To quote Crafting Interpreters "Ideally, we would have an actual abstraction, some kind of “ErrorReporter” interface that gets passed to the scanner and parser so that we can swap out different reporting strategies." - may be an opporutnity for AI to play a role
@@ -25,8 +26,7 @@ Chapter - 5 by 7th June (Ratiq)
 Chapter - 4 by 7th June (Youssef) - DONE
         Extra Functionality - Finish by June 14th
                 1. Tokenize Chars - DONE
-                        -unknown characters blob should be reported as one entity rather than individual i.e "これ は　だいじょぶない"
-                2. Semicolons and newline handling
+                2. Unknown characters blob should be reported as one entity rather than individual i.e "これ は　だいじょぶない" - DONE
                 3. Specific error reporting
 
 
@@ -41,3 +41,8 @@ Chapter 4 Complete
 NUMBER LITERALS:
         when performing method calls on numbers, negation will not take precendence over the method
                 i.e: print -123.abs(); --> -123
+
+## FORMALLY UNTESTED SECTIONS
+
+        -Char tokenization
+        -Blob Reporting
