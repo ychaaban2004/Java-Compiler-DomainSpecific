@@ -48,8 +48,9 @@ public class trick{
         }
     }
 
-    /*Runs a source code file to interpret
-     * @param: path of string, i.e the code itself
+    /**
+     * Runs a source code file to interpret
+     * @param path - path of string, i.e the code itself
      * @return: none
      */
 
@@ -60,9 +61,10 @@ public class trick{
         if(hadError) System.exit(65);
     }
     
-    /*Runs code interpretation line by line
-     * @param:no internal code, but takes stdin
-     * @return: none
+    /**
+     * Runs code interpretation line by line using stdin
+     * @param none
+     * @return none
      */
     private static void runPrompt() throws IOException{
         InputStreamReader input = new InputStreamReader(System.in);
@@ -78,9 +80,10 @@ public class trick{
 
     }
 
-    /*What happens once we pass some code and want to "run the interpeter" - FOR NOW JUST OUTPUTTING TOKENS
-     * @param: source code
-     * @return: none
+    /**
+     * What happens once we pass some code and want to "run the interpeter" - FOR NOW JUST OUTPUTTING TOKENS
+     * @param source - source code
+     * @return none
      */
     private static void run(String source){
         Scanner scanner = new Scanner(source);
@@ -92,13 +95,16 @@ public class trick{
          }
     }
 
-    /*Basic error handling method and its helper, tells your there is an error and where - stdout
-     * @param: code line - int, where in the code - string, whats the error - string
-     * @return: none
+    /**
+     * Basic error handling method and its helper, tells your there is an error and where - stdout
+     * @param line - Line number of error location
+     * @param message - Error message
+     * @return none
      */
     static void error(int line, String message){
         report(line, "", message);
     }
+    
     /*|************************| Include more advanced error reporting, rather than just the line 
     specify where excatly in the line with a string message*/
     private static void report(int line, String where, String message){ 

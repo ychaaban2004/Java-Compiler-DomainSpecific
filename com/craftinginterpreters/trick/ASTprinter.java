@@ -2,8 +2,9 @@ package com.craftinginterpreters.trick;
 
 import static com.craftinginterpreters.trick.Expr;
 
-
+// Temporary AST printer for each expression type using the visitor pattern
 public class ASTprinter implements Expr.Visitor<String>{
+    
     String print(Expr expr) {
         return expr.accept(this);
     }
