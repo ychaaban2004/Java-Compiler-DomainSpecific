@@ -5,17 +5,12 @@ class Token {
     final String lexeme;
     final Object literal;
     final int line;
-<<<<<<< HEAD
-    /*Construct to instantiate token objectts with passed values for instance field instantiation
-     * @param: token type - trick's enum object, lexeme name - string, line number - int
-=======
 
     /**
      * Construct to instantiate token objectts with passed values for instance field instantiation
      * @param type - trick's enum object 
      * @param name - string,
      * @param line - int
->>>>>>> 4ac6a27d214592a0a3a20bd8331dd5ee3784920c
      * @return: toke - object
     */
     Token(TokenType type, String lexeme, Object literal, int line){
