@@ -1,4 +1,4 @@
-package com.craftinginterpreters.trick;
+package comCARBONCOPY.craftinginterpreters.trick.craftinginterpreters.trick;
 
 import static com.craftinginterpreters.trick.Expr;
 
